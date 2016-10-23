@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1='Net Magazine Magic Link Demo'
+  section(id='messages')
+
+  section(id='errors')
+
+  section(id='main')
+    h2 Welcome, #{fName} #{lName}!
+    p You'll only see this page if you're properly logged in
+    p
+      a(href='/logout') Logout

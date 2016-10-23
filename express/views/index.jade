@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1='Net Magazine Magic Link Demo'
+  section(id='messages')
+
+  section(id='errors')
+
+  section(id='main')
+    form(method='post', action='/login')
+      table
+        tr
+          td
+            label(for='username') Username
+          td
+            input(type='text', name='username')
+        tr(class='password')
+          td
+            label(for='password') Password
+          td
+            input(type='password', name='password')
+        tr(class='magiclink')
+          td(style='text-align:center;')
+            input(type='submit', name='magiclink', value='Send a Magic Link')
+          td(style='text-align:center;')
+            input(type='button', value='Enter Password')
+        tr(class='password')
+          td(colspan='2', style='text-align:center;')
+            input(type='submit', value='Login')
+      p
+        a(href='/register') Create an Account
+
+  script.
+    document.querySelector('tr.magiclink input[type=button]').addEventListener('click', function() {
+      document.body.className = 'password';
+    });
