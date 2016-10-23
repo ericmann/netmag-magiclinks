@@ -6,15 +6,45 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var low = require('lowdb');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/user');
 
 var app = express();
+app.set('trust proxy', 1);
+app.use(session({
+    secret: 'netmagazine',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {}
+}));
 
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
+
+// Dependencies
+app.db = low('db.json');
+app.db.defaults({ users: [] }).value();
+app.hasher = require('bcrypt');
+
+// Messages
+app.errors = {
+    'generic'     : 'Something went wrong ... please contact support',
+    'useduser'    : 'That username is already in use',
+    'emptyemail'  : 'Please enter a valid email address',
+    'badpassword' : 'Your current password is invalid',
+    'nomatch'     : 'Please re-enter the same password to confirm',
+    'invalidlogin': 'Invalid login. Perhaps you need to <a href="/register">register</a> first.',
+    'notloggedin' : 'You don\'t seem to be logged in'
+};
+app.messages = {
+    'registered': 'Your account is now registered!',
+    'checkemail': 'Please check your email for a magic link.',
+    'loggedout' : 'You have been logged out'
+};
 
 // view engine setup
 

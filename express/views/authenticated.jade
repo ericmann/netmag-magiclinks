@@ -3,8 +3,12 @@ extends layout
 block content
   h1='Net Magazine Magic Link Demo'
   section(id='messages')
+    if message
+      p #{message}
 
   section(id='errors')
+    if error
+      p #{error}
 
   section(id='main')
     h2 Welcome, #{fName} #{lName}!

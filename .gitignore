@@ -4,3 +4,4 @@
 !**/data/README.md
 **/logs/*
 !**/logs/README.md
+**/db.json
