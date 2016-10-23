@@ -60,9 +60,7 @@ $container['errors'] = function ($c) {
 	return [
 		'generic'      => 'Something went wrong ... please contact support',
 		'useduser'     => 'That username is already in use',
-		'emptydest'    => 'Please enter a valid phone number',
-		'emptyotp'     => 'Please enter the one-time password you received on your device',
-		'badsession'   => 'There was an error completing your session. Please <a href="/">start over</a> and try again',
+		'emptyemail'   => 'Please enter a valid email address',
 		'badpassword'  => 'Your current password is invalid',
 		'nomatch'      => 'Please re-enter the same password to confirm',
 		'invalidlogin' => 'Invalid login. Perhaps you need to <a href="/register">register</a> first.',
