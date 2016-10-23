@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./express/bin/www
+cd express && ./bin/www
