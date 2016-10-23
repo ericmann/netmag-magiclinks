@@ -1,2 +1,6 @@
 **/.env
 **/vendor
+**/data/*
+!**/data/README.md
+**/logs/*
+!**/logs/README.md
