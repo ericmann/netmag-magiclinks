@@ -1,0 +1,27 @@
+{
+    "name": "ericmann/magiclinks-demo",
+    "description": "Demonstration of Magic Link based authentication for Net Magazine",
+    "keywords": ["magic links", "authentication"],
+    "homepage": "https://github.com/ericmann/netmag-magiclinks",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Mann",
+            "email": "eric@eamann.com",
+            "homepage": "https://eamann.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "slim/php-view": "^2.0",
+        "monolog/monolog": "^1.17",
+        "vlucas/phpdotenv": "^2.4",
+        "fire015/flintstone": "^2.0",
+        "tozny/sdk-php": "^1.4",
+        "hautelook/phpass": "^1.0"
+    },
+	"scripts": {
+        "start": "php -S 0.0.0.0:8080 -t public public/index.php"
+	}
+}

@@ -1,0 +1,1 @@
+The application's log database will be written to this directory.
