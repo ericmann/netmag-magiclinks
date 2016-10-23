@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var middleware = require('../routes/middleware');
 var router = express.Router();
 
 /* GET home page. */
@@ -60,11 +61,11 @@ router.post('/register', function(req, res) {
 
   req.session.username = username;
   req.session.save();
-console.log(req.session);
+
   return res.redirect('/authenticated');
 });
 
-router.all('/login', function(req, res) {
+router.all('/login', middleware.passwordAuthentication, middleware.toznyAuthentication, function(req, res) {
   if ( undefined !== req.body.magiclink ) {
     let username = req.body.username;
 
