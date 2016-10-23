@@ -29,9 +29,14 @@
         table td {
             text-align: left;
         }
+
+        body.magiclink .password,
+        body.password .magiclink {
+            display: none;
+        }
     </style>
 </head>
-<body>
+<body class="magiclink">
 <h1>Net Magazine Magic Link Demo</h1>
 
 <section id="messages">
@@ -57,7 +62,7 @@
                     <input type="text" name="username" />
                 </td>
             </tr>
-            <tr>
+            <tr class="password">
                 <td>
                     <label for="password">Password</label>
                 </td>
@@ -65,7 +70,15 @@
                     <input type="password" name="password" />
                 </td>
             </tr>
-            <tr>
+            <tr class="magiclink">
+                <td style="text-align: center;">
+                    <input type="submit" name="magiclink" value="Send a Magic Link" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="button" value="Enter Password" />
+                </td>
+            </tr>
+            <tr class="password">
                 <td colspan="2" style="text-align: center;">
                     <input type="submit" value="Login" />
                 </td>
@@ -74,5 +87,12 @@
         <p><a href="/register">Create an account</a></p>
     </form>
 </section>
+
+<script type="text/javascript">
+    document.querySelector('tr.magiclink input[type=button]').addEventListener('click', function() {
+        document.body.className = 'password';
+    });
+</script>
+
 </body>
 </html>

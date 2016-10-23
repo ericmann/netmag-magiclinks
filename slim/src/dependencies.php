@@ -76,7 +76,7 @@ $container['errors'] = function ($c) {
 $container['messages'] = function ($c) {
 	return [
 		'registered' => 'Your account is now registered!',
-		'updated'    => 'Your password has been updated',
+		'checkemail' => 'Please check your email for a magic link.',
 		'loggedout'  => 'You have been logged out'
 	];
 };

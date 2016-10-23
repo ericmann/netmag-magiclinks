@@ -67,7 +67,32 @@ $app->post('/register', function($request, $response, $args) {
 $app->any('/login', function($request, $response, $args) {
 	/** @var \Slim\Http\Request $request */
 	/** @var \Slim\Http\Response $response */
-var_dump($request);
+
+	if ( $request->getParam('magiclink') ) {
+		$username = $request->getParam('username');
+
+		if ( ! empty( $username ) ) {
+			$user = $this->users->get( $username );
+
+			if ( $user ) {
+				$user_data = json_decode( $user, true );
+
+				$sent = $this->tozny_realm->realmLinkChallenge(
+					$user_data['email'],
+					getenv('SITEURL') . '/login',
+					null,
+					'authenticate',
+					true,
+					json_encode( ['username' => $username])
+				);
+
+				if ( 'ok' === $sent['return']) {
+					return $response->withRedirect('/?message=checkemail');
+				}
+			}
+		}
+	}
+
 	return $response->withRedirect('/?error=invalidlogin');
 })->add( new PasswordAuthentication($container) )->add( new MagicLinkAuthentication($container) );
 
