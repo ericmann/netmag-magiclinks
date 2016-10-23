@@ -64,6 +64,33 @@ console.log(req.session);
   return res.redirect('/authenticated');
 });
 
+router.all('/login', function(req, res) {
+  if ( undefined !== req.body.magiclink ) {
+    let username = req.body.username;
+
+    if (undefined !== username) {
+      let user = req.app.db.get('users').find({username: username}).value();
+
+      if (user) {
+        return req.app.tozny_realm.linkChallenge(
+            user.email,
+            process.env.SITEURL + '/login',
+            undefined,
+            'authenticate',
+            true,
+            JSON.stringify( {'username': username})
+        ).then(function(sent) {
+          if ( 'ok' === sent.return ) {
+            return res.redirect('/?message=checkemail');
+          }
+        });
+      }
+    }
+  }
+
+  return res.redirect('/?error=invalidlogin');
+});
+
 router.get('/authenticated', function(req, res) {
   let data = { title: 'Net Magazine Magic Link Demo' };
 
