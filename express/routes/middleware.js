@@ -12,7 +12,7 @@ module.exports = {
 		let username = req.body.username;
 		let password = req.body.password;
 
-		if ( undefined === username ||undefined === password) {
+		if ( undefined === username && undefined === password) {
 			next();
 		} else if (username && undefined !== req.body.magiclink ) {
 			next();
